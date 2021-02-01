@@ -127,6 +127,7 @@ const char *RConfigEnrolled = "config/enrolled";
 const char *RConfigFanMode = "config/fanmode";
 const char *RConfigGroup = "config/group";
 const char *RConfigHeatSetpoint = "config/heatsetpoint";
+const char *RConfigEurotronicValve = "config/eurotronicvalve";
 const char *RConfigHostFlags = "config/hostflags";
 const char *RConfigId = "config/id";
 const char *RConfigLastChangeAmount = "config/lastchange_amount";
@@ -289,6 +290,7 @@ void initResourceDescriptors()
     rItemDescriptors.emplace_back(ResourceItemDescriptor(DataTypeString, RConfigFanMode));
     rItemDescriptors.emplace_back(ResourceItemDescriptor(DataTypeString, RConfigGroup));
     rItemDescriptors.emplace_back(ResourceItemDescriptor(DataTypeInt16, RConfigHeatSetpoint, 500, 3200));
+    rItemDescriptors.emplace_back(ResourceItemDescriptor(DataTypeInt16, RConfigEurotronicValve, 0, 255));
     rItemDescriptors.emplace_back(ResourceItemDescriptor(DataTypeUInt32, RConfigHostFlags));
     rItemDescriptors.emplace_back(ResourceItemDescriptor(DataTypeUInt32, RConfigId));
     rItemDescriptors.emplace_back(ResourceItemDescriptor(DataTypeInt16, RConfigLastChangeAmount));

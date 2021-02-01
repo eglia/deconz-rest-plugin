@@ -1169,6 +1169,27 @@ int DeRestPluginPrivate::changeSensorConfig(const ApiRequest &req, ApiResponse &
                         attributeList.insert(0x0012, (quint32)heatsetpoint);
                     }
                 }
+                else if (rid.suffix == RConfigEurotronicValve)
+                {
+                    int16_t valve = map[pi.key()].toUInt(&ok);
+
+                    if (sensor->modelId().startsWith(QLatin1String("SPZB"))) // Eurotronic Spirit
+                    {
+                        if (addTaskThermostatReadWriteAttribute(task, deCONZ::ZclWriteAttributesId, VENDOR_JENNIC, 0x4001, deCONZ::Zcl16BitInt, valve))
+                        {
+                            // success depends on the correctness of the formulated request (static), not on outcome of the behaviour (dynamic)
+                            updated = true;
+                        }
+                        else
+                        {
+                            rsp.list.append(errorToMap(ERR_INVALID_VALUE,
+                                                       QString("/sensors/%1/%2").arg(id).arg(rid.suffix),
+                                                       QString("could not set attribute value=%1").arg(map[pi.key()].toString())));
+                            rsp.httpStatus = HttpStatusBadRequest;
+                            return REQ_READY_SEND;
+                        }
+                    }
+                }
                 else if (rid.suffix == RConfigCoolSetpoint)
                 {
                     if (map[pi.key()].type() == QVariant::Double)

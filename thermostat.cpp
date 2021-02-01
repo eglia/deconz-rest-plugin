@@ -788,6 +788,24 @@ void DeRestPluginPrivate::handleThermostatClusterIndication(const deCONZ::ApsDat
                 break;
 
             case 0x4001: // U8 (0x20): value 0x00, valve position
+                if (zclFrame.manufacturerCode() == VENDOR_JENNIC && sensor->modelId().startsWith(QLatin1String("SPZB"))) // Eurotronic Spirit
+                {
+                    quint8 valve = attr.numericValue().u8;
+                    item = sensor->item(RConfigEurotronicValve);
+                    if (item)
+                    {
+                        if (updateType == NodeValue::UpdateByZclReport)
+                        {
+                            stateUpdated = true;
+                        }
+                        if (item->toNumber() != valve)
+                        {
+                            item->setValue(valve);
+                            enqueueEvent(Event(RSensors, RConfigEurotronicValve, sensor->id(), item));
+                            stateUpdated = true;
+                        }
+                    }
+                }
             case 0x4002: // U8 (0x20): value 0x00, errors
             {
                 if (zclFrame.manufacturerCode() == VENDOR_JENNIC)

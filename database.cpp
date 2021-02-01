@@ -3596,6 +3596,7 @@ static int sqliteLoadAllSensorsCallback(void *user, int ncols, char **colval , c
                     sensor.addItem(DataTypeBool, RConfigDisplayFlipped)->setValue(false);
                     sensor.addItem(DataTypeBool, RConfigLocked)->setValue(false);
                     sensor.addItem(DataTypeString, RConfigMode);
+                    sensor.addItem(DataTypeInt16, RConfigEurotronicValve);
                 }
                 else if (sensor.modelId() == QLatin1String("Super TR"))   // ELKO
                 {

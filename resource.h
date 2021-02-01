@@ -135,6 +135,7 @@ extern const char *RConfigEnrolled;
 extern const char *RConfigFanMode;
 extern const char *RConfigGroup;
 extern const char *RConfigHeatSetpoint;
+extern const char *RConfigEurotronicValve;
 extern const char *RConfigHostFlags;
 extern const char *RConfigLastChangeAmount;
 extern const char *RConfigLastChangeSource;
