@@ -4032,6 +4032,14 @@ static int sqliteLoadAllSensorsCallback(void *user, int ncols, char **colval , c
                     }
                 }
 
+                {
+                    auto *productId = sensor.item(RAttrProductId);
+                    if (productId)
+                    {
+                        productId->setIsPublic(false); // don't show in REST-API
+                    }
+                }
+
                 sensor.address().setExt(extAddr);
                 // append to cache if not already known
                 d->sensors.push_back(sensor);
